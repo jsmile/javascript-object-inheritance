@@ -123,9 +123,10 @@ function Family( firstName )
 {
     this.firstName = firstName;
     const names = ['bill', 'mark', 'steve'];
-    names.map( function(names, index) 
+    
+    names.map( function( name, index ) 
     {
-      console.log( names + ' ' + this.firstName );     // 내부함수의 호출자 : window
+      console.log( name + ' ' + this.firstName );     // 내부함수의 호출자 : window
       console.log( this );
     });
 }
@@ -141,9 +142,10 @@ function Family( firstName )
 function Family_1( firstName ) 
 {
     this.firstName = firstName;
-    const lastName = ['bill', 'mark', 'steve'];
+    const lastNames = ['bill', 'mark', 'steve'];
     let that = this;                                // this 를 외부변수로 지정함.
-    names.map( function( lastName, index ) 
+    
+    lastNames.map( function( lastName, index )      // lastName : 그냥 개별항목을 의미하고 제한없음.
     {
       console.log( lastName + ' ' + that.firstName ); // 호출자 : that === this
     });
@@ -158,11 +160,12 @@ function Family_1( firstName )
  function Family_2( firstName ) 
  {
    this.firstName = firstName;
-   const lastName = ['bill', 'mark', 'steve'];
-   names.map( function( lastName, index ) 
+   const lastNames = ['bill', 'mark', 'steve'];
+
+   lastNames.map( function( lastName, index ) 
    {
-     console.log( lastName + ' ' + this.firstName ); // 호출자 : Family_2
-   }.bind( this ) );                        // bind( this ) : 함수를 객체에 고정
+     console.log( lastName + ' ' + this.firstName );  // 호출자 : Family_2 : this 사용가능
+   }.bind( this ) );                                  // bind( this ) : 함수를 객체에 고정
  }
  const jungs = new Family_2( 'Jung' );
 // bill Jung
